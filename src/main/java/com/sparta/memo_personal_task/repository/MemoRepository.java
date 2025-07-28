@@ -1,12 +1,23 @@
 package com.sparta.memo_personal_task.repository;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.sparta.memo_personal_task.dto.MemoResponseDto;
+import com.sparta.memo_personal_task.entity.Memo;
 
-public class MemoRepository {
+import java.util.List;
 
-    private final JdbcTemplate jdbctemplate;
 
-    public MemoRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+public interface MemoRepository {
+    MemoResponseDto saveMemo(Memo memo);
+
+    List<MemoResponseDto> findAllMemos();
+
+    List<MemoResponseDto> getMemosByKeyword(String keyword);
+
+    List<MemoResponseDto> findMemosByUsername(String username);
+
+    Memo findMemoByIdOrElseThrow(Long id);
+
+    int updateMemo(Long id, String title, String contents);
+
+    int deleteMemoById(Long id);
 }
